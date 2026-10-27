@@ -1,0 +1,71 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>QuickCash Tools</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#10131c;color:#f4f6ff;font-family:Arial,sans-serif;padding:20px}
+header{text-align:center;padding:24px 0}
+h1{margin:0;color:#65e6a4;font-size:30px}
+p{color:#aab3c7;line-height:1.5}
+.card{background:#1b2130;border:1px solid #30394b;border-radius:16px;padding:18px;margin:16px 0}
+label{display:block;margin:12px 0 6px}
+input,textarea,button{width:100%;padding:13px;border-radius:10px;border:1px solid #3b465b;font-size:16px}
+input,textarea{background:#10131c;color:white}
+button{background:#65e6a4;color:#10131c;font-weight:bold;border:0;margin-top:12px}
+.output{white-space:pre-wrap;color:#fff;background:#10131c;border-radius:10px;padding:14px;margin-top:14px;min-height:50px}
+small{color:#aab3c7}
+</style>
+</head>
+<body>
+<header>
+<h1>QuickCash Tools</h1>
+<p>Simple tools for creators and small businesses in Namibia.</p>
+</header>
+<section class="card">
+<h2>WhatsApp Advert Maker</h2>
+<p>Create a promotional message for your product or service.</p>
+<label for="business">Business name</label>
+<input id="business" placeholder="e.g. Anna's Hair Studio">
+<label for="product">Product or service</label>
+<input id="product" placeholder="e.g. Braids">
+<label for="price">Price in N$</label>
+<input id="price" placeholder="e.g. 150">
+<label for="contact">Contact details (optional)</label>
+<input id="contact" placeholder="e.g. WhatsApp number">
+<button onclick="makeAd()">Create my advert</button>
+<div class="output" id="result">Your advert will appear here.</div>
+<button onclick="copyAd()">Copy advert</button>
+<p><small>This tool is free to try. It does not guarantee sales or income.</small></p>
+</section>
+<script>
+function makeAd(){
+const business=document.getElementById('business').value.trim();
+const product=document.getElementById('product').value.trim();
+const price=document.getElementById('price').value.trim();
+const contact=document.getElementById('contact').value.trim();
+if(!business||!product){
+document.getElementById('result').textContent='Please enter your business name and product or service.';
+return;
+}
+let ad='✨ '+business+' ✨\n\nLooking for '+product+'? We can help!\n';
+if(price)ad+='\nPrice: N$'+price;
+if(contact)ad+='\nContact: '+contact;
+ad+='\n\nMessage us today for more information! 📲';
+document.getElementById('result').textContent=ad;
+}
+async function copyAd(){
+const text=document.getElementById('result').textContent;
+try{
+await navigator.clipboard.writeText(text);
+alert('Advert copied!');
+}catch(e){
+alert('Copy is unavailable here. Select the advert text and copy it manually.');
+}
+}
+</script>
+</body>
+</html>
